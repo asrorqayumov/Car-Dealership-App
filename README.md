@@ -1,4 +1,4 @@
-# Getting Started with Create React App and Redux
+# Crypto App (React and Redux, Redux toolkit)
 
 In the project directory, you can run:
 

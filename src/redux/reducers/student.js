@@ -13,8 +13,15 @@ export const studentSlice = createSlice({
     extraReducers:{
         [getStudent.pending]:(state,action)=>{
           state.status  = 'pending'
-        }
+        },
+       [getStudent.fulfilled]:(state,action)=>{
+        state.status = 'success';
+        state.student = action.payload
+       },
+       [getStudent.rejected]:(state,action)=>{
+        state.status = 'failed'
+       }
     }
 })
-export const {} = studentSlice.actions
+
 export default studentSlice.reducer

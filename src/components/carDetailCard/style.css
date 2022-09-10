@@ -1,0 +1,28 @@
+.car_detail_card {
+  position: absolute;
+  width: 396px;
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding: 16px 24px 16px 24px;
+}
+.detail_card_header h3{
+    font-size: 24px;
+    padding-bottom: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.detail_card_header p{
+    font-size: 16px;
+    font-weight: 400;
+}
+.detail_card_img{
+    height: 160px;
+    width: 348px;
+    margin: 16px 0px 16px 0px;
+}
+.detail_card_info{
+    margin-bottom: 4px;
+}
+.last{
+    text-align: center;
+}

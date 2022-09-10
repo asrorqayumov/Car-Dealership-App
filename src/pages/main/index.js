@@ -15,8 +15,8 @@ const Main = () => {
   useEffect(() => {
     dispatch(getCategory());
   }, []);
-  const categoryHandler=(id)=>{
-     dispatch(setCategoryId(id));
+  const categoryHandler=(id,name)=>{
+     dispatch(setCategoryId({id,name}));
      navigate('/models')
   }
   return (

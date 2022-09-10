@@ -19,3 +19,12 @@ export function GetCategoryCarsRequest(id, limit = 5, page = 1) {
     .then((res) => res.data.data.data)
     .catch((err) => err);
 }
+
+export function GetCar(id) {
+  return axios
+    .get(`/car/${id}`)
+    .then((res) => res.data.data)
+    .catch((err) => err);
+} 
+
+

@@ -21,4 +21,5 @@
     display: flex;
     padding-top: 48px;
     flex-wrap: wrap;
+    min-height: 73vh;
 }

@@ -1,23 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { logInRequest } from "../../api/requests";
 import "./style.css";
 
-const Login = () => {
+const Login = ({setData}) => {
+  const [user,setUser] = useState({
+    phoneNumber:'',
+    password:'',
+});
+const inputHandler = (e)=>{
+     setUser({...user,[e.target.name]:e.target.value})
+}
+const formHandler = async(e)=>{
+     e.preventDefault();
+     try {
+        const response = await logInRequest(user);
+        localStorage.setItem('token',JSON.stringify(response.data.token))
+        setData('success')
+     } catch (err) {
+        console.log(err);
+     }
+ }
   return (
     <section className="main_section">
       <div className="login_wrapper">
         <div className="login_card">
           <h1>Log in </h1>
-          <form className="login_form">
+          <form onSubmit={formHandler}  className="login_form">
             <div className="form_group">
-              <label className="login_label" htmlFor="phoneNumber">
+              <label className="login_label" htmlFor="phone">
                 Phone
               </label>
               <input
                 className="input"
                 type="text"
-                name="phone"
-                id="phoneNumber"
+                name="phoneNumber"
+                id="phone"
+                onChange={inputHandler}
               />
             </div>
             <div className="form_group">
@@ -29,12 +47,10 @@ const Login = () => {
                 type="password"
                 name="password"
                 id="password"
+                onChange={inputHandler}
               />
             </div>
             <div className="form_group_last">
-              <p className="login_text">
-                Don't have a account ? <Link className="login_link" to={"/sign-up"}>Sign up</Link>
-              </p>
               <button className="btn_primary">Submit</button>
             </div>
           </form>

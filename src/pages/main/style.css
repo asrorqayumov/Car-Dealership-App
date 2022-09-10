@@ -1,0 +1,24 @@
+.main_button_wrapper{
+    display:flex;
+    justify-content: end;
+}
+.pr-5{
+    padding-right: 5px;
+}
+.navigation_text{
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+}
+.models_container {
+    padding-top: 20px;
+}
+.models_container h2{
+    font-size: 40px;
+    font-weight: 500;
+}
+.models_wrapper{
+    display: flex;
+    padding-top: 48px;
+    flex-wrap: wrap;
+}

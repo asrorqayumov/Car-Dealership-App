@@ -1,0 +1,10 @@
+.car_card{
+    padding-right: 32px;
+    padding-bottom: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+.car_card_img {
+  width: 289px;
+  height: 220px;
+}

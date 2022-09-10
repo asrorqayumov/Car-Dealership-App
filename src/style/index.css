@@ -13,7 +13,7 @@ body {
 }
 
 .main_section {
-  padding: 20px;
+  padding: 30px 94px 30px 94px;
   min-height: 100vh;
 }
 
@@ -28,6 +28,7 @@ body {
   background: #2a85ff;
   color: white;
   border-radius: 12px;
+  text-decoration: none;
 }
 .btn_primary:active {
   transform: scale(0.95);

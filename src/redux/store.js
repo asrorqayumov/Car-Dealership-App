@@ -1,13 +1,15 @@
 
 import { configureStore } from '@reduxjs/toolkit';
-import counter from './reducers/counter';
-import student from './reducers/student';
+import categoryId from './reducers/categoryId';
+import categorys from './reducers/category';
+import categoryCars from './reducers/categoryCars'
 
 
 const store = configureStore({
     reducer:{
-        counter,
-        student,
+        categoryId,
+        categorys,
+        categoryCars,
     }
 })
 

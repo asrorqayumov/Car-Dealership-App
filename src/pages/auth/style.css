@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 94vh;
+  min-height: 92vh;
 }
 .login_card {
   width: 400px;
@@ -33,16 +33,10 @@
 .form_group_last {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
 }
-.login_text{
-  font-size: 13.5px;
-  color: rgba(128, 128, 128, 0.841);
-}
-.login_link{
-  text-decoration: none;
-  color: rgba(10, 43, 230, 0.787);
-}
+
+
 .login_label {
   font-weight: 600;
   padding-bottom: 8px;

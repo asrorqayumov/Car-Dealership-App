@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/auth/login";
 import Main from "./pages/main";
 import CarModels from './pages/carModels/index';
 import Admin from './pages/adminPanel/index';
 import CarDetail from "./pages/carDetails";
-import SignUp from "./pages/auth/signUp";
 
 
 function App() {
   let token = localStorage.getItem("token");
+  const [data,setData] = useState('')
   if (token) {
     return (
       <Routes>
@@ -22,8 +22,7 @@ function App() {
   } else {
     return (
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />}  />
+          <Route path="/" element={<Login setData={setData} />} />
         </Routes>
     );
   }

@@ -13,7 +13,7 @@ export const FormGroup = ({name,label,inputHandler}) => {
       id={label}
       placeholder="Kiriting"
       onChange={inputHandler}
-      required
+      // required
     />
   </div>
   )

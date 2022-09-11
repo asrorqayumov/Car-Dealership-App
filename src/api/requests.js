@@ -3,9 +3,7 @@ import axios from "./axios";
 
 // file upload
 export function FileUpload(file) {
-  return axios.post(`/upload`, file, {
-    headers: file.headers,
-  });
+  return axios.post(`/upload`, file,);
 }
 
 
@@ -44,6 +42,13 @@ export function GetCar(id) {
   return axios
     .get(`/car/${id}`)
     .then((res) => res.data.data)
+    .catch((err) => err);
+}
+
+export function CreateCar(data) {
+  return axios
+    .post(`/car`, data)
+    .then((res) => res)
     .catch((err) => err);
 }
 

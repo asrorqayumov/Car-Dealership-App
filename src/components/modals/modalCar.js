@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { CreateCategory, FileUpload } from "../../api/requests";
+import { CreateCar, FileUpload } from "../../api/requests";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "./../../redux/reducers/category";
 import { FormGroup } from "../formGroup";
+import { Alert } from "../../utils/SweetAlert";
+import "./style.css";
 Modal.setAppElement("#root");
 
 export const ModalCar = ({ isOpen, setOpen }) => {
@@ -24,16 +25,56 @@ export const ModalCar = ({ isOpen, setOpen }) => {
     gearbok: "",
     categoryId: "",
   });
+  const [files, setFiles] = useState({
+    imgUrl: null,
+    imgUrlInside: null,
+    imgUrlAutside: null,
+  });
   const categorys = useSelector((store) => store.categorys.categorys);
   const dispatch = useDispatch();
+
+  const imgUrlFormData = new FormData();
+  const imgUrlInsideFormData  = new FormData();
+  const imgUrlAutsideFormData = new FormData();
+
   useEffect(() => {
     dispatch(getCategory());
   }, []);
-  
+
   const inputHandler = (e) => {
     setCar({ ...car, [e.target.name]: e.target.value });
   };
- 
+  
+  const onFileUpload = (e) => {
+    setFiles({...files,[e.target.name]:e.target.files[0]});
+  };
+
+  function addFormData() {
+    imgUrlInsideFormData.append('file',files.imgUrlInside);
+    imgUrlAutsideFormData.append('file',files.imgUrlAutside);
+    imgUrlFormData.append('file',files.imgUrl);
+    setFiles('');
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    addFormData();
+    try {
+      const imgUrlRequest = await FileUpload(imgUrlFormData);
+      const imgUrlInsideRequest = await FileUpload(imgUrlInsideFormData);
+      const imgUrlAutsideRequest = await FileUpload(imgUrlAutsideFormData);
+      setCar({...car, imgUrl:imgUrlRequest.data.data});
+      setCar({...car, imgUrlInside:imgUrlInsideRequest.data.data});
+      setCar({...car, imgUrlAutside:imgUrlAutsideRequest.data.data});
+      const carRequest = await CreateCar(car);
+
+       
+      // Alert('success','Car created Successfully')
+    } catch (e) {
+      Alert('error',e.message)
+    }
+  };
+  
   return (
     <Modal
       isOpen={isOpen}
@@ -50,15 +91,24 @@ export const ModalCar = ({ isOpen, setOpen }) => {
         </button>
       </div>
       <div className="modal_body">
-        <form className="form_modal" onSubmit="">
+        <form className="form_modal" onSubmit={handleSubmit}>
           <div className="d-flex">
             <div className="form_group modal_form">
               <label className="login_label" htmlFor="categoryId">
                 Markasi
               </label>
-              <select name="categoryId" className="input"  onChange={inputHandler} id="categoryId">
+              <select
+                name="categoryId"
+                className="input"
+                onChange={inputHandler}
+                id="categoryId"
+              >
                 {categorys.map((item) => {
-                  return <option key={item._id} value={item._id}>{item.name}</option>;
+                  return (
+                    <option key={item._id} value={item._id}>
+                      {item.name}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -66,7 +116,12 @@ export const ModalCar = ({ isOpen, setOpen }) => {
               <label className="login_label" htmlFor="tonirovka">
                 Tanirovkasi
               </label>
-              <select name="tonirovka"  onChange={inputHandler} className="input" id="tonirovka">
+              <select
+                name="tonirovka"
+                onChange={inputHandler}
+                className="input"
+                id="tonirovka"
+              >
                 <option value="yoq">Yoq</option>
                 <option value="oldi orqa qilingan">Oldi orqa qilingan</option>
                 <option value="2 ta yon tomoni qilingan">
@@ -108,8 +163,8 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 type="file"
                 name="imgUrlInside"
                 id="imgUrlInside"
-                // onChange={fileHandler}
-                // required
+                onChange={onFileUpload}
+                required
               />
             </div>
             <div className="form_group modal_form">
@@ -123,8 +178,8 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 type="file"
                 name="imgUrlAutside"
                 id="imgUrlAutside"
-                // onChange={fileHandler}
-                // required
+                onChange={onFileUpload}
+                required
               />
             </div>
           </div>
@@ -134,14 +189,13 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 Description
               </label>
               <textarea
-               onChange={inputHandler}
+                onChange={inputHandler}
                 rows={3}
                 className="input textarea"
                 type="text"
                 name="description"
                 id="description"
                 placeholder="Kiriting"
-                // onChange={inputHandler}
                 // required
               />
             </div>
@@ -156,8 +210,8 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 type="file"
                 name="imgUrl"
                 id="imgUrl"
-                // onChange={fileHandler}
-                // required
+                onChange={onFileUpload}
+                required
               />
             </div>
           </div>

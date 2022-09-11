@@ -24,15 +24,11 @@ export const ModalModel = ({ isOpen, setOpen }) => {
 
   const formHandler = async (e) => {
     e.preventDefault();
-    try {
-      const file =   await FileUpload(formdata)
-      console.log(file);
-      const create = await CreateCategory({ name, imgUrl });
-      console.log(create);
-     
-    } catch (err) {
-      console.log(err);
-    }
+    const file = await FileUpload(formdata);
+    setImgUrl(file);
+    console.log(file.data.data);
+    const create = await CreateCategory({name,imgUrl});
+    console.log(create);
   };
 
   return (

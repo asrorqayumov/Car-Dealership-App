@@ -1,11 +1,23 @@
 import axios from "./axios";
 
+
+// file upload
+export function FileUpload(file) {
+  return axios.post(`/upload`, file, {
+    headers: file.headers,
+  });
+}
+
+
+// Log in
 export function logInRequest(data) {
   return axios
     .post("/employee/login", data)
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+// Category
 export function GetCategorys(limit = 5, page = 1) {
   return axios
     .get(`/category/marka?limit=${limit}&page=${page}`)
@@ -20,11 +32,18 @@ export function GetCategoryCarsRequest(id, limit = 5, page = 1) {
     .catch((err) => err);
 }
 
+export function CreateCategory(data) {
+  return axios
+    .post(`/category`, data)
+    .then((res) => res)
+    .catch((err) => err);
+}
+
+// Car
 export function GetCar(id) {
   return axios
     .get(`/car/${id}`)
     .then((res) => res.data.data)
     .catch((err) => err);
-} 
-
+}
 

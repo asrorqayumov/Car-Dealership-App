@@ -12,6 +12,11 @@ body {
   box-sizing: border-box;
 }
 
+::placeholder{
+  color: #9A9FA5;
+
+}
+
 .main_section {
   padding: 30px 94px 30px 94px;
   min-height: 100vh;
@@ -41,4 +46,35 @@ body {
   border: none;
   outline: none;
   width: 100%;
+}
+.ReactModal__Overlay {
+  z-index: 50;
+  background: #F4F4F4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-card-modal {
+  position: relative;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 850px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 9px 30px;
+  padding: 34px 24px 34px 24px;
+}
+
+@media (max-width:991px){
+  .react-card-modal{
+    width: 750px;
+  }
+}
+@media (max-width:778px){
+  .react-card-modal{
+    width: 620px;
+  }
 }

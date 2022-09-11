@@ -17,7 +17,7 @@ const CarModels = () => {
       .catch((err) => console.log(err));
   }, []);
   
-  console.log(cars);
+  
   return (
     <div className="main_section">
       <div className="main_button_wrapper">

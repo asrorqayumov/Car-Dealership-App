@@ -1,0 +1,38 @@
+nav {
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  position: fixed;
+  width: 100%;
+  padding-left: 300px;
+}
+.nav_btn {
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+}
+.nav_right_side {
+  padding-right: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.icon_bell {
+  padding-right: 20px;
+  font-size: 22px;
+  color: #6f767e;
+}
+.icon_before {
+  background: #ff6a55;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: relative;
+  left: 24px;
+  bottom: 7px;
+}
+
+.avatar {
+  width: 41px;
+}

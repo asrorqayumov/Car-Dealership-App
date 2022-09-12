@@ -19,6 +19,7 @@
     height: 160px;
     width: 348px;
     margin: 16px 0px 16px 0px;
+    object-fit: scale-down;
 }
 .detail_card_info{
     margin-bottom: 4px;

@@ -2,7 +2,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categoryId from './reducers/categoryId';
 import categorys from './reducers/category';
-import categoryCars from './reducers/categoryCars'
+import categoryCars from './reducers/categoryCars';
+import cars from './reducers/cars';
 
 
 const store = configureStore({
@@ -10,6 +11,7 @@ const store = configureStore({
         categoryId,
         categorys,
         categoryCars,
+        cars,
     }
 })
 

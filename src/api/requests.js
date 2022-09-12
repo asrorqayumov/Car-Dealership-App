@@ -52,3 +52,16 @@ export function CreateCar(data) {
     .catch((err) => err);
 }
 
+export function DeleteCar(id) {
+  return axios.delete(`/car/${id}`);
+}
+
+
+export function GetCars( limit = 5, page = 1) {
+  return axios
+    .get(`/car?limit=${limit}&page=${page}`)
+    .then((res) => res.data.data.data)
+    .catch((err) => err);
+}
+
+

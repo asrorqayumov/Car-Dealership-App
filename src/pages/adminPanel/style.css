@@ -1,0 +1,10 @@
+.admin_container {
+  background: #e3e3e3;
+  min-height: 100vh;
+}
+.section_cars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}

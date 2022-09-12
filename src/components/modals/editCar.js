@@ -27,6 +27,7 @@ export const EditCar = ({ isOpen, setOpen, currentCar,}) => {
     gearbok: "",
     categoryId: "",
   });
+
   const [files, setFiles] = useState({
     imgUrl: null,
     imgUrlInside: null,
@@ -41,6 +42,7 @@ export const EditCar = ({ isOpen, setOpen, currentCar,}) => {
 
   useEffect(() => {
       dispatch(getCategory());
+      setCar(currentCar);
   }, []);
 
   const inputHandler = (e) => {
@@ -76,6 +78,8 @@ export const EditCar = ({ isOpen, setOpen, currentCar,}) => {
       Alert('error',e.message)
     }
   };
+  console.log(car);
+  console.log();
   
   return (
     <Modal

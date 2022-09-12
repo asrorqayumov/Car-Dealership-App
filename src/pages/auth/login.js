@@ -14,7 +14,7 @@ const formHandler = async(e)=>{
      e.preventDefault();
      try {
         const response = await logInRequest(user);
-        localStorage.setItem('token',JSON.stringify(response.data.token))
+        localStorage.setItem('token',response.data.token)
         setData('success')
      } catch (err) {
         console.log(err);

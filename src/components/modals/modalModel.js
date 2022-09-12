@@ -4,11 +4,12 @@ import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { CreateCategory, FileUpload } from "../../api/requests";
+import { useEffect } from "react";
+import { Alert } from "../../utils/SweetAlert";
 Modal.setAppElement("#root");
 
 export const ModalModel = ({ isOpen, setOpen }) => {
   const [name, setName] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
   const formdata = new FormData();
 
   const fileHandler = async (e) => {
@@ -21,14 +22,22 @@ export const ModalModel = ({ isOpen, setOpen }) => {
   const inputHandler = (e) => {
     setName(e.target.value);
   };
+  useEffect(() => {
+    // CreateCategory({ name, imgUrl })
+    //   .then((res) => setOpen(false))
+    //   .then((res) => Alert("success", "Category created successfully"))
+    //   .catch((err) => Alert("error", err));
+  }, []);
 
   const formHandler = async (e) => {
     e.preventDefault();
-    const file = await FileUpload(formdata);
-    setImgUrl(file);
-    console.log(file.data.data);
-    const create = await CreateCategory({name,imgUrl});
-    console.log(create);
+    try {
+      const file = await FileUpload(formdata);
+      
+    } catch (err) {
+      Alert('error',err)
+    }
+     
   };
 
   return (

@@ -8,7 +8,7 @@ export const CarDetailCard = ({car:{price,imgUrl,marka,tonirovka,motor,year,colo
   return (
     <div className='car_detail_card'>
          <div className="detail_card_header">
-            <h3>Chevrolet malibu</h3>
+            <h3>{marka.name}</h3>
             <p>{price} so'm dan</p>
          </div>
          <img src={img} className='detail_card_img' alt="" />

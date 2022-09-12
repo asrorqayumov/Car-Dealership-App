@@ -1,5 +1,6 @@
 import Axios from "axios";
-import { Alert } from "../utils/SweetAlert";
+
+
 const axios = Axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
 });

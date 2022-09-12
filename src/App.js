@@ -9,7 +9,7 @@ import CarDetail from "./pages/carDetails";
 
 function App() {
   let token = localStorage.getItem("token");
-  const [data,setData] = useState('')
+  const [data,setData] = useState('');
   if (token) {
     return (
       <Routes>

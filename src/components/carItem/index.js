@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash,faPen } from "@fortawesome/free-solid-svg-icons";
 
-export const CarItem = ({index,deleteHandler,car:{marka,gearbok,tonirovka,motor,year,color,distance,_id}}) => {
+export const CarItem = ({index,editHandler,deleteHandler,car,car:{marka,gearbok,tonirovka,motor,year,color,distance,_id}}) => {
     
   return (
     <ul className="car_list">
@@ -15,7 +15,7 @@ export const CarItem = ({index,deleteHandler,car:{marka,gearbok,tonirovka,motor,
       <li className="car_list_item">{color}</li>
       <li className="car_list_item">{distance}</li>
       <li className="car_list_item_last">
-        <button className="btn_update edit">
+        <button className="btn_update edit" onClick={()=>editHandler(car)}>
           <FontAwesomeIcon className="icon_update" icon={faPen} />
         </button>
       </li>

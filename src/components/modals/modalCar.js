@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { CreateCar, FileUpload } from "../../api/requests";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "./../../redux/reducers/category";
 import { FormGroup } from "../formGroup";
 import { Alert } from "../../utils/SweetAlert";
+import Select from "react-select";
 import "./style.css";
 Modal.setAppElement("#root");
 
@@ -20,30 +21,39 @@ export const ModalCar = ({ isOpen, setOpen }) => {
     color: "",
     distance: "",
     gearbok: "",
-    categoryId: "",
   });
   const [imgUrl, setImgUrl] = useState("");
   const [imgUrlInside, setImgUrlInside] = useState("");
   const [imgUrlAutside, setImgUrlAutside] = useState("");
+  const [categoryId, setCategoyId] = useState("");
+  const [optionsModel, setOptionsModel] = useState([{ value: "", label: "" }]);
   const [files, setFiles] = useState({
     imgUrl: null,
     imgUrlInside: null,
     imgUrlAutside: null,
   });
   const categorys = useSelector((store) => store.categorys.categorys);
+  console.log(categorys);
   const dispatch = useDispatch();
 
   const imgUrlFormData = new FormData();
   const imgUrlInsideFormData = new FormData();
   const imgUrlAutsideFormData = new FormData();
-
+  
   useEffect(()=>{
-    dispatch(getCategory(100));
+    dispatch(getCategory(50))
+    if (categorys)
+    setOptionsModel(
+      categorys.map(item => ({
+        value: item._id,
+        label: item.name,
+      })),
+    );
   },[]);
 
   useEffect(() => {
     if (imgUrlAutside && car.price) {
-      CreateCar({ ...car, imgUrl, imgUrlInside, imgUrlAutside })
+      CreateCar({ ...car, categoryId,imgUrl, imgUrlInside, imgUrlAutside })
         .then((res) => {
           Alert("success", "Car created successfully");
           setOpen(false);
@@ -111,43 +121,25 @@ export const ModalCar = ({ isOpen, setOpen }) => {
               <label className="login_label" htmlFor="categoryId">
                 Markasi
               </label>
-              <select
-                name="categoryId"
-                className="input"
-                onChange={inputHandler}
-                id="categoryId"
-                defaultValue={categorys[0]._id}
-              
+              <Select
+                options={optionsModel}
+                onChange={e => setCategoyId(e.value)}
+      
               >
-                {categorys.map((item) => {
-                  return (
-                    <option selected={true} key={item._id} value={item._id}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </select>
+              </Select>
             </div>
             <div className="form_group modal_form">
               <label className="login_label" htmlFor="tonirovka">
                 Tanirovkasi
               </label>
-              <select
+              <input
                 name="tonirovka"
                 onChange={inputHandler}
                 className="input"
                 id="tonirovka"
-                defaultValue={car?.tonirovka}
+                placeholder="Kiriting"
               >
-                <option selected={true} value="yoq">
-                  Yoq
-                </option>
-                <option value="oldi orqa qilingan">Oldi orqa qilingan</option>
-                <option value="2 ta yon tomoni qilingan">
-                  2 ta yon tomoni qilingan
-                </option>
-                <option value="to'liq qilingan">To'liq qilingan</option>
-              </select>
+              </input>
             </div>
           </div>
           <div className="d-flex">

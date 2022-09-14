@@ -94,7 +94,7 @@ export const EditCar = () => {
     }
   };
 
-  console.log(currentCar);
+
   
   return (
     <div

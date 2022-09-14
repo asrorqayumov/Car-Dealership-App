@@ -116,7 +116,8 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 className="input"
                 onChange={inputHandler}
                 id="categoryId"
-                defaultValue={car?.categoryId}
+                defaultValue={categorys[0]._id}
+              
               >
                 {categorys.map((item) => {
                   return (

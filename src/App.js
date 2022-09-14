@@ -5,6 +5,7 @@ import Main from "./pages/main";
 import CarModels from './pages/carModels/index';
 import Admin from './pages/adminPanel/index';
 import CarDetail from "./pages/carDetails";
+import { EditCar } from "./components/modals/editCar";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/models" element={<CarModels />} />
         <Route path="/models/:id" element={<CarDetail />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/edit-car" element={<EditCar />} />
       </Routes>
     );
   } else {

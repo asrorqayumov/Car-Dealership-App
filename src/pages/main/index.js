@@ -13,7 +13,7 @@ const Main = () => {
   const categorys = useSelector((store) => store.categorys);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategory());
+    dispatch(getCategory(100));
   }, []);
   const categoryHandler=(id,name)=>{
      dispatch(setCategoryId({id,name}));

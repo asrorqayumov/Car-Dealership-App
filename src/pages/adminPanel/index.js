@@ -5,13 +5,15 @@ import { Sidebar } from "../../components/sidebar";
 import { ModalCar } from "./../../components/modals/modalCar";
 import { CarsContainer } from "../../components/carsContainer";
 import "./style.css";
-import { EditCar } from './../../components/modals/editCar';
+import { useDispatch } from 'react-redux';
+import { setCar } from "../../redux/reducers/carForEdit";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
   const [modelModalIsOpen, setModelModalIsOpen] = useState(false);
   const [carModalIsOpen, setCarModalIsOpen] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [car,setCar]=useState({});
+  const navigate = useNavigate('')
+  const dispatch =useDispatch()
   const openModelModal = () => {
     setModelModalIsOpen(true);
   };
@@ -19,15 +21,14 @@ const Profile = () => {
     setCarModalIsOpen(true);
   };
   const editHandler = (car) => {
-    setCar(car);
-    setModalIsOpen(true)
+     dispatch(setCar(car));
+     navigate('/edit-car')
   };
 
   return (
     <div className="admin_container">
       <ModalModel isOpen={modelModalIsOpen} setOpen={setModelModalIsOpen} />
       <ModalCar isOpen={carModalIsOpen} setOpen={setCarModalIsOpen} />
-      <EditCar currentCar={car} isOpen={modalIsOpen} setOpen={setModalIsOpen} />
       <Sidebar />
       <Navbar />
       <div className="section_cars">

@@ -7,7 +7,7 @@ export function Car360Degree({ car }) {
   const [ins, setIns] = useState(true);
   return (
     <div className="car360_degree">
-      <h2>{car.marka.name}</h2>
+      <h2 className="car360_degree_title">{car.marka.name}</h2>
       <Pannellum
         image={`${process.env.REACT_APP_BACKEND_URL}/${ins ? car.imgUrlAutside : car.imgUrlInside}`}
         pitch={10}
@@ -21,7 +21,7 @@ export function Car360Degree({ car }) {
       <div  className='degree360_svg'>
       <img src={img360} alt=""  />
       </div>
-      <p>
+      <p className="car360_degree_text">
         Tasvir tanlangan konfiguratsiyaga mos kelmasligi mumkin. Mashinaning
         rangi ushbu saytda taqdim etilganidan farq qilishi mumkin.
       </p>

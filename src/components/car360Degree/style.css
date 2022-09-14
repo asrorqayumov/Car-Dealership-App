@@ -1,20 +1,18 @@
 .car360_degree {
   padding-left: 600px;
 }
-.car360_degree h2{
+.car360_degree_title{
   font-size: 24px !important;
 }
 .degree360_svg{
  display: flex;
  justify-content: center;
 }
-.car360_degree p {
+.car360_degree_text{
   text-align: center;
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 14px;
+  padding-bottom: 5px;
 }
 .car360_degree .status {
   display: flex;

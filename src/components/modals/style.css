@@ -53,3 +53,12 @@
 .textarea {
   resize: none;
 }
+.edit_modal{
+  width:100% !important;
+  box-shadow: none !important;
+}
+.link_toback{
+  text-decoration: none;
+  color: black;
+  padding-right: 12px;
+}

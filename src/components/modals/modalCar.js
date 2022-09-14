@@ -37,8 +37,11 @@ export const ModalCar = ({ isOpen, setOpen }) => {
   const imgUrlInsideFormData = new FormData();
   const imgUrlAutsideFormData = new FormData();
 
+  useEffect(()=>{
+    dispatch(getCategory(100));
+  },[]);
+
   useEffect(() => {
-    dispatch(getCategory(20));
     if (imgUrlAutside && car.price) {
       CreateCar({ ...car, imgUrl, imgUrlInside, imgUrlAutside })
         .then((res) => {
@@ -51,7 +54,7 @@ export const ModalCar = ({ isOpen, setOpen }) => {
         })
         .catch((err) => Alert("success", err));
     }
-  }, [imgUrl, imgUrlAutside, imgUrlInside]);
+  }, [imgUrlAutside,]);
 
   const inputHandler = (e) => {
     setCar({ ...car, [e.target.name]: e.target.value });
@@ -86,7 +89,6 @@ export const ModalCar = ({ isOpen, setOpen }) => {
       Alert("error", e.message);
     }
   };
-  console.log(car);
   return (
     <Modal
       isOpen={isOpen}

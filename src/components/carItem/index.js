@@ -15,13 +15,13 @@ export const CarItem = ({index,editHandler,deleteHandler,car,car:{marka,gearbok,
       <li className="car_list_item">{color}</li>
       <li className="car_list_item">{distance}</li>
       <li className="car_list_item_last">
-        <button className="btn_update edit" onClick={()=>editHandler(car)}>
-          <FontAwesomeIcon className="icon_update" icon={faPen} />
+        <button className="btn_update delete" onClick={()=>deleteHandler(_id)}>
+          <FontAwesomeIcon className="icon_update" icon={faTrash} />
         </button>
       </li>
       <li className="car_list_item_last">
-        <button className="btn_update delete" onClick={()=>deleteHandler(_id)}>
-          <FontAwesomeIcon className="icon_update" icon={faTrash} />
+        <button className="btn_update edit" onClick={()=>editHandler(car)}>
+          <FontAwesomeIcon className="icon_update" icon={faPen} />
         </button>
       </li>
     </ul>

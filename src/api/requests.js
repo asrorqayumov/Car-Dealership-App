@@ -50,6 +50,13 @@ export function CreateCar(data) {
     .catch((err) => err);
 }
 
+export function UpdateCar(data) {
+  return axios
+    .put(`/car`, data)
+    .then((res) => res)
+    .catch((err) => err);
+}
+
 export function DeleteCar(id) {
   return axios.delete(`/car/${id}`);
 }

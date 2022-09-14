@@ -1,4 +1,4 @@
-# Crypto App (React and Redux, Redux toolkit)
+# Car dealirship App (React and Redux, Redux toolkit)
 
 In the project directory, you can run:
 

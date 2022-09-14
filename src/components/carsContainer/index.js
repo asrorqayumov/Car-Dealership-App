@@ -23,7 +23,7 @@ export const CarsContainer = ({
   const deleteHandler = async (id) => {
     try {
       const req = await DeleteCar(id);
-      console.log(req.response.data);
+      dispatch(GetAllCars());
       Alert("success", "Car deleted successfully");
     } catch (err) {
       Alert("error", `${err}`);

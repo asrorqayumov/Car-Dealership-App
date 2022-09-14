@@ -10,6 +10,7 @@ Modal.setAppElement("#root");
 
 export const ModalModel = ({ isOpen, setOpen }) => {
   const [name, setName] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const formdata = new FormData();
 
   const fileHandler = async (e) => {
@@ -23,21 +24,26 @@ export const ModalModel = ({ isOpen, setOpen }) => {
     setName(e.target.value);
   };
   useEffect(() => {
-    // CreateCategory({ name, imgUrl })
-    //   .then((res) => setOpen(false))
-    //   .then((res) => Alert("success", "Category created successfully"))
-    //   .catch((err) => Alert("error", err));
-  }, []);
+    if (name && imgUrl) {
+      CreateCategory({ name, imgUrl })
+        .then((res) => {
+          setOpen(false);
+          setImgUrl("");
+          setName("");
+          Alert("success", "Category created successfully");
+        })
+        .catch((err) => Alert("error", err));
+    }
+  }, [imgUrl]);
 
   const formHandler = async (e) => {
     e.preventDefault();
     try {
       const file = await FileUpload(formdata);
-      
+      setImgUrl(file.data.data);
     } catch (err) {
-      Alert('error',err)
+      Alert("error", err);
     }
-     
   };
 
   return (
@@ -73,18 +79,18 @@ export const ModalModel = ({ isOpen, setOpen }) => {
               />
             </div>
             <div className="form_group modal_form">
-              <p className="login_label">Rasmi</p>
-              <label className="input img-label" htmlFor="imgUrl">
-                <FontAwesomeIcon className="camera_icon" icon={faCamera} />
-                Yuklash
+             
+              <label className="login_label" htmlFor="imgUrl">
+                Rasm
               </label>
               <input
-                className="input_file"
+                className="input input_file"
                 type="file"
                 name="imgUrl"
                 id="imgUrl"
                 onChange={fileHandler}
                 required
+                
               />
             </div>
           </div>

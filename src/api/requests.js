@@ -30,12 +30,7 @@ export function GetCategoryCarsRequest(id, limit = 5, page = 1) {
 }
 
 export function CreateCategory(data) {
-  return Axios({
-    method: "post",
-    url: "https://cartestwebapp.herokuapp.com/category",
-    data: data,
-    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3NGFhNGFmM2FmNmEzZDc1NTY5NWYiLCJwaG9uZU51bWJlciI6Iis5OTg5OTM0NjY3ODkiLCJpYXQiOjE2NjI5NTk3MDksImV4cCI6MTY2MzU2NDUwOX0.UduJFDbBqumksaiRmG_yvCuB77IU5F2mH_sbrdxNU-Y` }
-  })
+  return axios.post('/category',data)
     .then((res) => res)
     .catch((err) => err);
 }

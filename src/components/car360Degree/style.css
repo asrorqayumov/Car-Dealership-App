@@ -1,0 +1,27 @@
+.car360_degree {
+  padding-left: 600px;
+}
+.car360_degree h2{
+  font-size: 24px !important;
+}
+.degree360_svg{
+ display: flex;
+ justify-content: center;
+}
+.car360_degree p {
+  text-align: center;
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+.car360_degree .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car360_degree .type label {
+  width: 100px;
+}

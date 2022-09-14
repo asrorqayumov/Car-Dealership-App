@@ -12,9 +12,6 @@ Modal.setAppElement("#root");
 
 export const ModalCar = ({ isOpen, setOpen }) => {
   const [car, setCar] = useState({
-    imgUrl: "",
-    imgUrlInside: "",
-    imgUrlAutside: "",
     price: "",
     year: "",
     description: "",
@@ -25,6 +22,9 @@ export const ModalCar = ({ isOpen, setOpen }) => {
     gearbok: "",
     categoryId: "",
   });
+  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrlInside, setImgUrlInside] = useState("");
+  const [imgUrlAutside, setImgUrlAutside] = useState("");
   const [files, setFiles] = useState({
     imgUrl: null,
     imgUrlInside: null,
@@ -34,47 +34,59 @@ export const ModalCar = ({ isOpen, setOpen }) => {
   const dispatch = useDispatch();
 
   const imgUrlFormData = new FormData();
-  const imgUrlInsideFormData  = new FormData();
+  const imgUrlInsideFormData = new FormData();
   const imgUrlAutsideFormData = new FormData();
 
   useEffect(() => {
-    dispatch(getCategory());
-  }, []);
+    dispatch(getCategory(20));
+    if (imgUrlAutside && car.price) {
+      CreateCar({ ...car, imgUrl, imgUrlInside, imgUrlAutside })
+        .then((res) => {
+          Alert("success", "Car created successfully");
+          setOpen(false);
+          setCar(null);
+          setImgUrl("");
+          setImgUrlAutside("");
+          setImgUrlInside("");
+        })
+        .catch((err) => Alert("success", err));
+    }
+  }, [imgUrl, imgUrlAutside, imgUrlInside]);
 
   const inputHandler = (e) => {
     setCar({ ...car, [e.target.name]: e.target.value });
+    if (e.target.name == "price" || e.target.name == "year") {
+      setCar({ ...car, [e.target.name]: +e.target.value });
+    }
   };
-  
+
   const onFileUpload = (e) => {
-    setFiles({...files,[e.target.name]:e.target.files[0]});
+    setFiles({ ...files, [e.target.name]: e.target.files[0] });
   };
 
   function addFormData() {
-    imgUrlInsideFormData.append('file',files.imgUrlInside);
-    imgUrlAutsideFormData.append('file',files.imgUrlAutside);
-    imgUrlFormData.append('file',files.imgUrl);
-    setFiles('');
+    imgUrlInsideFormData.append("file", files.imgUrlInside);
+    imgUrlAutsideFormData.append("file", files.imgUrlAutside);
+    imgUrlFormData.append("file", files.imgUrl);
+    setFiles("");
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     addFormData();
     try {
-      const imgUrlRequest = await FileUpload(imgUrlFormData);
-      const imgUrlInsideRequest = await FileUpload(imgUrlInsideFormData);
-      const imgUrlAutsideRequest = await FileUpload(imgUrlAutsideFormData);
-      setCar({...car, imgUrl:imgUrlRequest.data.data});
-      setCar({...car, imgUrlInside:imgUrlInsideRequest.data.data});
-      setCar({...car, imgUrlAutside:imgUrlAutsideRequest.data.data});
-      const carRequest = await CreateCar(car);
-
-       
-      // Alert('success','Car created Successfully')
+      FileUpload(imgUrlFormData).then((res) => setImgUrl(res.data.data));
+      FileUpload(imgUrlInsideFormData).then((res) =>
+        setImgUrlInside(res.data.data)
+      );
+      FileUpload(imgUrlAutsideFormData).then((res) =>
+        setImgUrlAutside(res.data.data)
+      );
     } catch (e) {
-      Alert('error',e.message)
+      Alert("error", e.message);
     }
   };
-  
+  console.log(car);
   return (
     <Modal
       isOpen={isOpen}
@@ -102,10 +114,11 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 className="input"
                 onChange={inputHandler}
                 id="categoryId"
+                defaultValue={car?.categoryId}
               >
                 {categorys.map((item) => {
                   return (
-                    <option key={item._id} value={item._id}>
+                    <option selected={true} key={item._id} value={item._id}>
                       {item.name}
                     </option>
                   );
@@ -121,8 +134,11 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 onChange={inputHandler}
                 className="input"
                 id="tonirovka"
+                defaultValue={car?.tonirovka}
               >
-                <option value="yoq">Yoq</option>
+                <option selected={true} value="yoq">
+                  Yoq
+                </option>
                 <option value="oldi orqa qilingan">Oldi orqa qilingan</option>
                 <option value="2 ta yon tomoni qilingan">
                   2 ta yon tomoni qilingan
@@ -132,15 +148,33 @@ export const ModalCar = ({ isOpen, setOpen }) => {
             </div>
           </div>
           <div className="d-flex">
-            <FormGroup label="Motor" name="motor" inputHandler={inputHandler} />
-            <FormGroup label="Year" name="year" inputHandler={inputHandler} />
+            <FormGroup
+              label="Motor"
+              value={car?.motor}
+              name="motor"
+              inputHandler={inputHandler}
+            />
+            <FormGroup
+              label="Year"
+              value={car?.year}
+              name="year"
+              type="number"
+              className="number_input"
+              inputHandler={inputHandler}
+            />
           </div>
           <div className="d-flex">
-            <FormGroup label="Color" name="color" inputHandler={inputHandler} />
+            <FormGroup
+              label="Color"
+              value={car?.color}
+              name="color"
+              inputHandler={inputHandler}
+            />
             <FormGroup
               label="Distance"
               name="distance"
               inputHandler={inputHandler}
+              value={car?.distance}
             />
           </div>
           <div className="d-flex">
@@ -148,18 +182,24 @@ export const ModalCar = ({ isOpen, setOpen }) => {
               label="Gearbook"
               name="gearbok"
               inputHandler={inputHandler}
+              value={car?.gearbok}
             />
-            <FormGroup label="Narxi" name="price" inputHandler={inputHandler} />
+            <FormGroup
+              label="Narxi"
+              value={car?.price}
+              type="number"
+              className="number_input"
+              name="price"
+              inputHandler={inputHandler}
+            />
           </div>
           <div className="d-flex">
             <div className="form_group modal_form">
-              <p className="login_label">Rasm 360 ichki makon</p>
-              <label className="input img-label" htmlFor="imgUrlInside">
-                <FontAwesomeIcon className="camera_icon" icon={faCamera} />
-                Yuklash
+              <label className="login_label" htmlFor="imgUrlInside">
+                Rasm 360 ichki makon
               </label>
               <input
-                className="input_file"
+                className="input input_file"
                 type="file"
                 name="imgUrlInside"
                 id="imgUrlInside"
@@ -168,13 +208,11 @@ export const ModalCar = ({ isOpen, setOpen }) => {
               />
             </div>
             <div className="form_group modal_form">
-              <p className="login_label">Rasm 360 tashqi makon</p>
-              <label className="input img-label" htmlFor="imgUrlAutside">
-                <FontAwesomeIcon className="camera_icon" icon={faCamera} />
-                Yuklash
+              <label className="login_label" htmlFor="imgUrlAutside">
+                Rasm 360 tashqi makon
               </label>
               <input
-                className="input_file"
+                className="input input_file"
                 type="file"
                 name="imgUrlAutside"
                 id="imgUrlAutside"
@@ -196,17 +234,16 @@ export const ModalCar = ({ isOpen, setOpen }) => {
                 name="description"
                 id="description"
                 placeholder="Kiriting"
-                // required
+                defaultChecked={car?.description}
+                required
               />
             </div>
             <div className="form_group modal_form">
-              <p className="login_label">Model turi uchun rasm</p>
-              <label className="input img-label" htmlFor="imgUrl">
-                <FontAwesomeIcon className="camera_icon" icon={faCamera} />
-                Yuklash
+              <label className="login_label" htmlFor="imgUrl">
+                Model turi uchun rasm
               </label>
               <input
-                className="input_file"
+                className="input input_file"
                 type="file"
                 name="imgUrl"
                 id="imgUrl"

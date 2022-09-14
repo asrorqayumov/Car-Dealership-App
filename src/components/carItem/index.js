@@ -7,7 +7,7 @@ export const CarItem = ({index,editHandler,deleteHandler,car,car:{marka,gearbok,
   return (
     <ul className="car_list">
       <li className="car_list_item">{index}</li>
-      <li className="car_list_item">{marka.name}</li>
+      <li className="car_list_item">{marka?.name}</li>
       <li className="car_list_item">{gearbok}</li>
       <li className="car_list_item">{tonirovka} </li>
       <li className="car_list_item">{motor}</li>

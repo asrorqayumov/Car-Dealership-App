@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { CarDetailCard } from "../../components/carDetailCard";
 import { GetCar } from "../../api/requests";
 import "./style.css";
+import { Car360Degree } from "../../components/car360Degree";
 
 const CarDetail = () => {
   let params = useParams();
@@ -36,7 +37,7 @@ const CarDetail = () => {
         <h2>Modellari</h2>
         {car?<div className="models_wrapper">
           <CarDetailCard car={car} />
-          <div className="card_vr"></div>
+          <Car360Degree car={car} />
         </div>:''}
       </div>
     </div>

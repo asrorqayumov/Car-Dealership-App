@@ -16,6 +16,12 @@ body {
   color: #9A9FA5;
 
 }
+.number_input::-webkit-outer-spin-button,
+.number_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 .main_section {
   padding: 30px 94px 30px 94px;

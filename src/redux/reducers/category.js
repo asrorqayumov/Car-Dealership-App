@@ -4,7 +4,7 @@ import { GetCategorys } from "../../api/requests";
 export const getCategory = createAsyncThunk(
     'getCategory',
     async(payload)=>{
-        return GetCategorys()
+        return GetCategorys(payload)
     }
 )
 

@@ -19,7 +19,8 @@
 }
 .models_wrapper{
     display: flex;
-    padding-top: 48px;
+    padding-top: 15px;
     flex-wrap: wrap;
     min-height: 73vh;
+    height: 480px;
 }
